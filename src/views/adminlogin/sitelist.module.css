@@ -1,0 +1,18 @@
+.main {
+    width: 800px;
+    margin: 0 auto;
+}
+
+.hero {
+    display: flex;
+    align-items: center;
+}
+
+.hero div {
+    margin-left: auto;
+}
+
+.listitem {
+    padding: 12px 0px;
+    cursor: pointer;
+}

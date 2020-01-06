@@ -1,0 +1,16 @@
+.main {
+    box-sizing: border-box;
+    position: relative;
+}
+
+.main .sidebar {
+    width: 240px;
+}
+
+.main .content {
+    position: absolute;
+    margin-left: 240px;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+}

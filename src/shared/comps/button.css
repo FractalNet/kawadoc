@@ -1,0 +1,33 @@
+.button {
+    cursor: pointer;
+    text-align: center;
+    white-space: nowrap;
+    line-height: 20px;
+    padding: 8px 13px;
+    border-radius: 4px;
+    user-select: none;
+    border: 0;
+    outline:none;
+
+    font-weight: bold;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.button-primary {
+    color: white;
+    background-color: #f36322;
+}
+
+.button-primary:hover {
+    opacity: .9;
+}
+
+.button-normal {
+    color: #667d99;
+    background-color: #e7edf3;
+}
+
+.button-normal:hover {
+    opacity: .9;
+}

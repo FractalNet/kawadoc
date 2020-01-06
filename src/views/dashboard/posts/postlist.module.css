@@ -1,0 +1,15 @@
+.topbar {
+    padding: 16px;
+    display: flex;
+    align-items: center;
+}
+
+
+.listitem {
+    padding: 16px;
+    cursor: pointer;
+}
+
+.listitem:hover {
+    background-color: #f8f8f8;
+}
