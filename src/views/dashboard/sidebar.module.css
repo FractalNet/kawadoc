@@ -28,3 +28,7 @@
     padding: 16px;
 }
 
+.listitem a {
+    text-decoration: none;
+    color: white !important;
+}

@@ -5,10 +5,10 @@ import styles from './sidebar.module.css'
 
 export default class SideBar extends Component {
     render() {
-        const menus = ["A", "B"]
+        const menus = ["A"]
         return (
             <div className={styles.sidebar}>
-                <Link style={{ textDecoration: 'none'}} to="/admin">
+                <Link style={{ textDecoration: 'none'}} to="/admin/sites">
                     <h1 className={styles.wawa}>哇哇文档</h1>  
                 </Link>              
                 <div className={styles.site}>
@@ -30,7 +30,7 @@ export default class SideBar extends Component {
 const ListItem = ({}) => {
     return (
         <div className={styles.listitem}>
-            Posts
+            <Link to="/dashboard/posts">Posts</Link>
         </div>
     )
 }

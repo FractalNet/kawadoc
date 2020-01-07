@@ -3,6 +3,7 @@ import { Route, Switch } from 'react-router-dom'
 import Header from './header'
 import Footer from './footer'
 import SiteList from './sitelist'
+import Login from './login'
 
 import styles from './index.module.css'
 
@@ -11,7 +12,12 @@ class AdminLayout extends Component {
         return (
             <div>
                 <Header/>
-                <SiteList/>
+                <div style={{width: '800px', margin: '0px auto', minHeight: '70vh'}} >
+                    <Switch>
+                        <Route path="/admin/sites" component={ SiteList } />
+                        <Route path="/admin/login" component={ Login } />
+                    </Switch>
+                </div>
                 <Footer/> 
             </div>
         );
