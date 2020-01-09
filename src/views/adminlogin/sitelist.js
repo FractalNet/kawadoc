@@ -1,8 +1,14 @@
 import React, { Component } from 'react'
+import { branch } from 'baobab-react/higher-order'
 import { withRouter } from 'react-router-dom'
 import { Button, Modal } from 'shared/comps'
 
 import styles from './sitelist.module.css'
+
+import {
+    getSiteList,
+    createSite,
+} from 'service/utils/site'
 
 class SiteList extends Component {
     state = {
@@ -21,8 +27,19 @@ class SiteList extends Component {
         this.setState({ visible: false })
     } 
 
+    handleSubmit = (site) => {
+        const data = {
+            bizID: site,
+        }
+        this.props.dispatch(createSite, data)
+    }
+
+    componentWillMount() {
+        this.props.dispatch(getSiteList)
+    }
+
     render() {
-        const sites = ["A", "B", "C"]
+        const { sites = [] } = this.props
         return (
             <div className={styles.main}>
                 <div className={styles.hero}>
@@ -33,24 +50,27 @@ class SiteList extends Component {
                 </div>
                 <div className={styles.list}>
                     {sites.map( site => {
-                        return <ListItem onClick={ () => this.handleItemClick(site) }/>
+                        return <ListItem item={site} key={site.id} onClick={ () => this.handleItemClick(site) }/>
                     })}
                 </div>
                 
                 {/* New site dialog */}
-                <NewSite visible={this.state.visible} onRequestClose={this.handleClose}/>
+                <NewSite visible={this.state.visible} onRequestClose={this.handleClose} onSubmit={this.handleSubmit}/>
             </div>
         );
     }
 }
-export default withRouter(SiteList);
+const binding = (props, context) => {
+    return {
+        sites: ["sites", "data"],
+    }
+}
+export default withRouter(branch(binding, SiteList))
 
-const ListItem = ({onClick}) => {
+const ListItem = ({item, onClick}) => {
     return (
-        <div className={styles.listitem} onClick={onClick}>Hello World ...
-
-    
-
+        <div className={styles.listitem} onClick={onClick}>
+            { item.bizID }
             <span className={styles.dots} style={{marginLeft: 'auto'}}>
                 <span/> <span/> <span/>
             </span>
@@ -59,14 +79,30 @@ const ListItem = ({onClick}) => {
 }
 
 class NewSite extends React.Component {
+    state = {
+        site: ""
+    }
+    handleSiteChnage = (e) => {
+        this.setState({ site: e.target.value})
+    }
+
+    handleSubmit = (e) => {
+        e.preventDefault();
+        const { site } = this.state
+        if (!site) {
+            alert("名称为空"); return
+        }
+        this.props.onSubmit(site)
+    }
+
     render() {
         const { visible, onRequestClose } = this.props
         return (
             <Modal title="添加站点" show={visible} onRequestClose={onRequestClose} >
                 <div className={styles.new} >
                     <form className={styles.form}>
-                        <input placeholder="站点名称" />
-                        <Button>确定</Button>
+                        <input placeholder="站点名称" onChange={this.handleSiteChnage} />
+                        <Button onClick={this.handleSubmit}>确定</Button>
                     </form>
                 </div>
             </Modal>

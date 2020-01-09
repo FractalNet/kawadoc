@@ -28,3 +28,9 @@
     width: 100% !important;
     height: 48px !important;
 }
+
+.form a {
+    margin-bottom: 16px;
+    color: #667d99;
+    align-self: flex-end;
+}

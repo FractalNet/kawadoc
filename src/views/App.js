@@ -17,14 +17,9 @@ tree.select('token', 'value').on('update', function(e) {
     var token = e.data.currentData;
     if (token) {
         client.setToken(token)
+        localStorage.setItem("token", token)
     }
 });
-
-// Update appkey
-tree.select('current', 'app_key').on('update', function(e) {
-    var appkey = e.data.currentData
-    client.setAppkey(appkey)
-})
 
 // 持久化存储, tree.commit() 强制一次提交，避免 Baobab 延迟
 const token = localStorage.getItem("token")
@@ -38,7 +33,7 @@ if (token && !isTokenExpired(token)) {
 
 function App() {
     return (
-        <BrowserRouter basename="/b">
+        <BrowserRouter>
         <Switch>
             <Route path="/admin" component={AdminLayout} />
             <Route path="/dashboard" component={DashboardLayout} />

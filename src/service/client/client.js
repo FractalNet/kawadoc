@@ -30,8 +30,32 @@ export default class KawaClient {
 		this.server = host
 	}
 
-	/*** API in http://kawaapp.com/api  ***/
+    /*** API in http://kawaapp.com/api  ***/
+    getLoginCode(phone) {
+        return this._get(`/api/login-sms?phone=${phone}`)
+    }
 
+    login(phone, code) {
+        return this._post(`/api/login?phone=${phone}&sms=${code}`)
+    }
+
+    // websites
+    getSiteList() {
+        return this._get(`/api/official-accounts/mine`)
+    }
+
+    createSite(data) {
+        return this._post(`/api/official-accounts`, data)
+    }
+
+    // article
+    getArticleList(site) {
+        return this._get(`/api/articles?official_account_id=${site}`)
+    }
+
+    getArticle(id) {
+        return this._get(`/api/articles/${id}`)
+    }
 
     // helper function
 	jsonQueryString(params) {
