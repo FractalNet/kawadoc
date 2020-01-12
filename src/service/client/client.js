@@ -57,6 +57,10 @@ export default class KawaClient {
         return this._get(`/api/articles/${id}`)
     }
 
+    importArticle(data) {
+        return this._post(`/api/articles/import`, data)
+    }
+
     // helper function
 	jsonQueryString(params) {
 		if (!params) {

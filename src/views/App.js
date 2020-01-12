@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { BrowserRouter, Route, Switch, Link } from 'react-router-dom';
+import React from 'react';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { root } from 'baobab-react/higher-order'
 import tree from 'model/state'
 import client from 'service/client'
@@ -36,7 +36,7 @@ function App() {
         <BrowserRouter>
         <Switch>
             <Route path="/admin" component={AdminLayout} />
-            <Route path="/dashboard" component={DashboardLayout} />
+            <Route path="/dashboard/:siteid" component={DashboardLayout} />
         </Switch>
         </BrowserRouter>
     );

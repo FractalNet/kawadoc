@@ -5,8 +5,6 @@ import Footer from './footer'
 import SiteList from './sitelist'
 import Login from './login'
 
-import styles from './index.module.css'
-
 class AdminLayout extends Component {
     render() {
         return (

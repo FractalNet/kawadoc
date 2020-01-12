@@ -7,7 +7,7 @@ import styles from './postlist.module.css'
 
 import {
     getArticleList,
-    createArticle,
+    importArticle,
 } from 'service/utils/article'
 
 class PostList extends React.Component {
@@ -24,18 +24,24 @@ class PostList extends React.Component {
     }
 
     componentDidMount() {
-        this.props.dispatch(getArticleList)
+        this.props.dispatch(getArticleList, this.props.match.params.siteid)
     }
 
     handleNewArticle = (link) => {
+        const { site } = this.props
         const data = {
-            link: link,
+            url: link,
+            officialAccountID: site.id,
         }
-        this.props.dispatch(createArticle, data)
+        this.props.dispatch(importArticle, site.bizID, data).then( data => {
+            this.setState({ visible: false })
+        }).catch( err => {
+            alert("导入错误：" + err)
+        })
     }
 
     render() {
-        const { articles = []} = this.props
+        const { articles = [] } = this.props
         return (
             <div style={{padding: '24px'}}>
                 <div className={styles.topbar}>
@@ -43,8 +49,8 @@ class PostList extends React.Component {
                     <span style={{marginRight: '16px'}}></span>Posts/
                 </div>
 
-                {articles.map( p => {
-                    return <ListItem />
+                {articles.map( item => {
+                    return <ListItem item={item} />
                 })}
                 <NewArticle visible={this.state.visible} onRequestClose={this.handleClose} onSubmit={this.handleNewArticle} />
             </div>
@@ -53,17 +59,20 @@ class PostList extends React.Component {
 }
 
 const binding = (props, context) => {
+    const { siteid } = props.match.params
     return {
-        articles: ["articles", "data"],
+        articles: ["articles", "data", siteid],
+        site: ["sites", "data", siteid],
     }
 }
 export default withRouter(branch(binding, PostList))
 
 class ListItem extends React.Component {
     render() {
+        const { item } = this.props
         return (
             <div className={styles.listitem}>
-                关于React和Vue有啥想说的..
+                { item.title }
                 <span className={styles.dots} style={{marginLeft: 'auto'}}>
                     <span/> <span/> <span/>
                 </span>

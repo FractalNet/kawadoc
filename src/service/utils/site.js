@@ -4,7 +4,24 @@ export const getSiteList = (tree) => {
     const cursor = tree.select("sites")
     client.getSiteList().then( data => {
         console.log("get sites:", data)
-        cursor.set("data", data.payload)
+        cursor.set("data", massage(data.payload))
+    }).catch( err => {
+        console.log("get sites err", err)
+    })
+}
+
+export const getSite = (tree, siteid) => {
+    // const cursor = tree.select("sites")
+    // client.getSite(siteid).then( data => {
+    //     console.log("get sites:", data)
+    //     cursor.set(["data", siteid], data.payload)
+    // }).catch( err => {
+    //     console.log("get sites err", err)
+    // })
+    const cursor = tree.select("sites")
+    client.getSiteList().then( data => {
+        console.log("get sites:", data)
+        cursor.set("data", massage(data.payload))
     }).catch( err => {
         console.log("get sites err", err)
     })
@@ -18,4 +35,13 @@ export const createSite = (tree, data) => {
     }).catch( err => {
         console.log("create site err", err)
     })
+}
+
+function massage(items) {
+    var data = {}
+    items.map( item => {
+        data[item.bizID] = item
+        return item
+    })
+    return data
 }

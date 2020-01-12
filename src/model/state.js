@@ -4,6 +4,7 @@ import Baobab from 'baobab'
 const user = window.KAWA_USER
 const sync = window.KAWA_SYNC
 
+// data 的数据结构为 EntityPattern 描述之结构.
 const state = {
     follow: false,
     language: "en-US",
@@ -25,13 +26,13 @@ const state = {
     sites: {
         loaded: false,
         error: undefined,
-        data: [],
+        data: {},
     },
 
     articles: {
         loaded: false,
         error: undefined,
-        data: [],
+        data: {},
     },
    
     message: {

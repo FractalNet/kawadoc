@@ -16,7 +16,7 @@ class SiteList extends Component {
     }
 
     handleItemClick = (site) => {
-        this.props.history.push("/dashboard")
+        this.props.history.push(`/dashboard/${site.bizID}`)
     }
 
     handleNew = () => {
@@ -28,6 +28,7 @@ class SiteList extends Component {
     } 
 
     handleSubmit = (site) => {
+        this.setState({ visible: false})
         const data = {
             bizID: site,
         }
@@ -39,7 +40,8 @@ class SiteList extends Component {
     }
 
     render() {
-        const { sites = [] } = this.props
+        const { sites = {} } = this.props
+        const list = Object.values(sites);
         return (
             <div className={styles.main}>
                 <div className={styles.hero}>
@@ -49,7 +51,7 @@ class SiteList extends Component {
                     </div>
                 </div>
                 <div className={styles.list}>
-                    {sites.map( site => {
+                    {list.map( site => {
                         return <ListItem item={site} key={site.id} onClick={ () => this.handleItemClick(site) }/>
                     })}
                 </div>
