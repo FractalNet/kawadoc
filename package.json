@@ -6,7 +6,7 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
-    "baobab": "^2.5.3",
+    "baobab": "^2.6.1",
     "baobab-react": "^4.0.0",
     "classnames": "^2.2.6",
     "moment": "^2.24.0",
